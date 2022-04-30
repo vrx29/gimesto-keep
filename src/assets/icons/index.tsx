@@ -1,0 +1,9 @@
+export { HomeIcon } from './HomeIcon';
+export { ArchiveIcon } from './ArchiveIcon';
+export { DeleteIcon } from './DeleteIcon';
+export { ProfileIcon } from './ProfileIcon';
+export { BoldIcon } from './BoldIcon';
+export { ItalicIcon } from './ItalicIcon';
+export { UnderlinedIcon } from './UnderlinedIcon';
+export { StrikeIcon } from './StrikeIcon';
+export { NoteIcon } from './NoteIcon';
