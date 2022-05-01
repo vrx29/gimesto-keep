@@ -3,4 +3,6 @@ export type NotesType = {
   noteColor: string;
   content: any;
   created: string;
+  priority: string;
+  labels: Array<string>;
 };

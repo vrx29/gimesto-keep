@@ -1,7 +1,6 @@
 div.DraftEditor-root {
-  min-height: 200px;
-  max-height: 70vh;
-  overflow-y: auto;
+  height: 200px;
+  /* overflow-y: auto; */
 }
 div.DraftEditor-editorContainer,
 div.public-DraftEditor-content {

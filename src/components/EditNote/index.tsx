@@ -29,7 +29,7 @@ export function EditNote({
   return (
     <>
       <div className="flex justify-between items-center my-4">
-        <div className="flex gap-0.5">
+        <div className="flex gap-1">
           {textModifiers.map((item) => (
             <button
               key={item.id}
@@ -39,12 +39,12 @@ export function EditNote({
             </button>
           ))}
         </div>
-        <div className="flex gap-0.5">
+        <div className="flex gap-1">
           {noteColors.map((item) => (
             <button
               key={item.id}
               onClick={() => setNoteColor(item.color)}
-              className={`${item.color} rounded-full border-2 border-gray-300 h-8 w-8`}></button>
+              className={`${item.color} border border-gray-300 rounded-lg text-sm px-4 py-4`}></button>
           ))}
         </div>
       </div>
