@@ -5,14 +5,14 @@ export const noteColors = [
   },
   {
     id: 2,
-    color: 'bg-orange-100'
+    color: 'bg-orange-50'
   },
   {
     id: 3,
-    color: 'bg-green-100'
+    color: 'bg-emerald-50'
   },
   {
     id: 4,
-    color: 'bg-purple-100'
+    color: 'bg-purple-50'
   }
 ];
