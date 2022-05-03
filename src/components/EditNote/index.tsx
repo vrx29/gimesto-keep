@@ -23,7 +23,8 @@ export function EditNote({
   };
 
   useEffect(() => {
-    setContent(convertToRaw(editorState.getCurrentContent()));
+    var contentRaw = convertToRaw(editorState.getCurrentContent());
+    setContent(JSON.stringify(contentRaw));
   }, [editorState]);
 
   return (
