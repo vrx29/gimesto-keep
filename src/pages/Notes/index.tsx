@@ -1,13 +1,14 @@
 import { ArchiveIcon, DeleteIcon, FilterIcon } from '../../assets/icons';
 import { NotesEditor } from '../../components';
-import { RootState } from '../../app/store';
-import { useDispatch, useSelector } from 'react-redux';
 import { clearCurrentNote, deleteNote } from 'features/Notes/notesSlice';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { toast } from 'react-toastify';
+
 export function Notes() {
-  const { data: notes, currentNote } = useSelector((state: RootState) => state.notes);
+  const { data: notes, currentNote } = useAppSelector((state) => state.notes);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const navigateNote = (id: string) => {
     navigate(id);
@@ -20,6 +21,7 @@ export function Notes() {
       dispatch(clearCurrentNote());
     }
     dispatch(deleteNote(id));
+    toast.success('Note deleted successfully', { autoClose: 500 });
   };
 
   return (
@@ -35,6 +37,7 @@ export function Notes() {
         <div className="my-4 flex justify-between items-center">
           <button
             type="button"
+            onClick={() => navigate('/1')}
             className="text-white bg-teal-600 focus:outline-none hover:bg-teal-700 font-medium rounded-lg text-sm px-5 py-2.5">
             Create new note
           </button>
@@ -42,7 +45,7 @@ export function Notes() {
             type="button"
             className="flex items-center text-gray-600 bg-white border border-gray-300 hover:bg-gray-100 font-medium rounded-lg text-sm px-2.5 py-2.5">
             Filters
-            <span className='ml-4 text-lg text-gray-500'>
+            <span className="ml-4 text-lg text-gray-500">
               <FilterIcon />
             </span>
           </button>

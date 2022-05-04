@@ -4,15 +4,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import { convertFromRaw, EditorState } from 'draft-js';
 import { labelsData } from '../../data/labelsData';
 import { Label } from '../Label';
-import { useDispatch, useSelector } from 'react-redux';
 import { addNote, findNote } from 'features/Notes/notesSlice';
 import { v4 as uuid } from 'uuid';
 import 'react-toastify/dist/ReactToastify.css';
 import { useParams } from 'react-router-dom';
-import { RootState } from 'app/store';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 
 export function NotesEditor() {
-  const currentNote = useSelector((state: RootState) => state.notes.currentNote);
+  const currentNote = useAppSelector((state) => state.notes.currentNote);
   const { noteId } = useParams();
   const [title, setTitle] = useState<string>('');
   const [noteColor, setNoteColor] = useState<string>('bg-white');
@@ -22,7 +21,7 @@ export function NotesEditor() {
   const [priority, setPriority] = useState<string>('Low');
 
   // Redux Dispatcher for dispatching actions
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (noteId) {
