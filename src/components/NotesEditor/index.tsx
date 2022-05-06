@@ -1,24 +1,53 @@
-import { Dispatch, SetStateAction, useState } from 'react';
-import { NotesType } from '../../types/notes';
+import { useEffect, useState } from 'react';
 import { EditNote } from '../EditNote';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { EditorState } from 'draft-js';
+import { convertFromRaw, EditorState } from 'draft-js';
 import { labelsData } from '../../data/labelsData';
 import { Label } from '../Label';
+import { addNote, findNote } from 'features/Notes/notesSlice';
+import { v4 as uuid } from 'uuid';
+import 'react-toastify/dist/ReactToastify.css';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 
-type NotesEditorPropType = {
-  notes: Array<NotesType>;
-  setNotes: Dispatch<SetStateAction<Array<NotesType>>>;
-};
-
-export function NotesEditor({ notes, setNotes }: NotesEditorPropType) {
+export function NotesEditor() {
+  const currentNote = useAppSelector((state) => state.notes.currentNote);
+  const { noteId } = useParams();
   const [title, setTitle] = useState<string>('');
   const [noteColor, setNoteColor] = useState<string>('bg-white');
   const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
   const [content, setContent] = useState<{}>();
   const [labels, setLabels] = useState<Array<string>>([]);
   const [priority, setPriority] = useState<string>('Low');
+
+  // Redux Dispatcher for dispatching actions
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (noteId) {
+      dispatch(findNote(noteId));
+    }
+  }, [noteId]);
+
+  useEffect(() => {
+    updateState();
+  }, [currentNote]);
+
+  const updateState = () => {
+    setTitle(currentNote.title || '');
+    setNoteColor(currentNote.noteColor || 'bg-white');
+    setLabels(currentNote.labels || []);
+    setPriority(currentNote.priority || 'Low');
+    setContent(currentNote.content || {});
+
+    if (currentNote.content) {
+      setEditorState(
+        EditorState.createWithContent(convertFromRaw(JSON.parse(currentNote.content)))
+      );
+    } else {
+      setEditorState(() => EditorState.createEmpty());
+    }
+  };
 
   const changeLabel = (label: string) => {
     if (labels.includes(label)) {
@@ -27,6 +56,11 @@ export function NotesEditor({ notes, setNotes }: NotesEditorPropType) {
     } else {
       setLabels([...labels, label]);
     }
+  };
+
+  const changePriority = (e: any) => {
+    e.preventDefault();
+    setPriority(e.target.value);
   };
 
   const clearNote = () => {
@@ -38,14 +72,21 @@ export function NotesEditor({ notes, setNotes }: NotesEditorPropType) {
     setPriority('Low');
   };
 
-  const addNote = () => {
+  const saveNote = () => {
     if (title.length < 1) {
       toast.warn('Please enter note title', { autoClose: 1000 });
     } else {
-      setNotes([
-        ...notes,
-        { title, noteColor, content, created: new Date().toDateString(), priority, labels }
-      ]);
+      dispatch(
+        addNote({
+          id: uuid(),
+          title,
+          noteColor,
+          content,
+          created: new Date().toDateString(),
+          priority,
+          labels
+        })
+      );
       clearNote();
       toast.success('Note added successfully', { autoClose: 1000 });
     }
@@ -62,9 +103,9 @@ export function NotesEditor({ notes, setNotes }: NotesEditorPropType) {
         </button>
         <button
           type="button"
-          onClick={addNote}
+          onClick={saveNote}
           className="text-white bg-teal-600 focus:outline-none hover:bg-teal-700 font-medium rounded-lg text-sm px-5 py-2.5">
-          Add note
+          Save note
         </button>
       </div>
       <div className="bg-stone-200 h-px my-2"></div>
@@ -78,12 +119,9 @@ export function NotesEditor({ notes, setNotes }: NotesEditorPropType) {
 
       <div className="flex gap-2">
         <select
-          defaultValue="Select Priority"
-          onChange={(e) => setPriority(e.target.value)}
+          value={priority}
+          onChange={(e) => changePriority(e)}
           className="text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 font-medium rounded-lg text-sm px-2.5 py-2.5">
-          <option disabled value="Select Priority">
-            Select Priority
-          </option>
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
           <option value="High">High</option>

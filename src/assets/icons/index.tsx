@@ -7,3 +7,4 @@ export { ItalicIcon } from './ItalicIcon';
 export { UnderlinedIcon } from './UnderlinedIcon';
 export { StrikeIcon } from './StrikeIcon';
 export { NoteIcon } from './NoteIcon';
+export { FilterIcon } from './FilterIcon';
