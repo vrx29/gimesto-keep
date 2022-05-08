@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { convertFromRaw, EditorState } from 'draft-js';
 import { labelsData } from '../../data/labelsData';
 import { Label } from '../Label';
-import { addNote, findNote } from 'features/Notes/notesSlice';
+import { addNote, findNote, updateNote } from 'features/Notes/notesSlice';
 import { v4 as uuid } from 'uuid';
 import 'react-toastify/dist/ReactToastify.css';
 import { useParams } from 'react-router-dom';
@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from 'app/hooks';
 
 export function NotesEditor() {
   const currentNote = useAppSelector((state) => state.notes.currentNote);
-  const { noteId } = useParams();
+  const { noteId = '1' } = useParams();
   const [title, setTitle] = useState<string>('');
   const [noteColor, setNoteColor] = useState<string>('bg-white');
   const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
@@ -73,22 +73,35 @@ export function NotesEditor() {
   };
 
   const saveNote = () => {
-    if (title.length < 1) {
-      toast.warn('Please enter note title', { autoClose: 1000 });
+    if (noteId !== '1') {
+      if (title.length < 1) {
+        toast.warn('Please enter note title', { autoClose: 1000 });
+      } else {
+        dispatch(
+          updateNote({
+            noteId,
+            data: { title, noteColor, content, priority, labels }
+          })
+        );
+      }
     } else {
-      dispatch(
-        addNote({
-          id: uuid(),
-          title,
-          noteColor,
-          content,
-          created: new Date().toDateString(),
-          priority,
-          labels
-        })
-      );
-      clearNote();
-      toast.success('Note added successfully', { autoClose: 1000 });
+      if (title.length < 1) {
+        toast.warn('Please enter note title', { autoClose: 1000 });
+      } else {
+        dispatch(
+          addNote({
+            id: uuid(),
+            title,
+            noteColor,
+            content,
+            created: new Date().toDateString(),
+            priority,
+            labels
+          })
+        );
+        clearNote();
+        toast.success('Note added successfully', { autoClose: 1000 });
+      }
     }
   };
 

@@ -16,7 +16,7 @@ export function Label({ labels, data, changeLabel }: LabelTypeProps) {
         htmlFor={data.name}
         className={`${
           labels.includes(data.name) ? 'bg-amber-200' : 'bg-white text-gray-900 bg-gray-100'
-        } font-medium rounded-lg text-sm px-2.5 py-2.5`}>
+        } font-medium rounded-lg text-sm px-3 py-2.5`}>
         {data.name}
       </label>
     </span>
