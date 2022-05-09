@@ -7,3 +7,9 @@ export type NotesType = {
   priority: string;
   labels: Array<string>;
 };
+
+export type filtersType = {
+  priority: string;
+  sortByTime: string;
+  labels: Array<string>;
+};

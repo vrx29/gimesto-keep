@@ -1,14 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { NotesType } from '../../types/notes';
+import { filtersType, NotesType } from '../../types/notes';
 
-export interface NotesState {
+interface NotesState {
   data: Array<NotesType>;
   currentNote: NotesType;
+  filters: filtersType;
 }
 
 const initialState: NotesState = {
   data: [] as Array<NotesType>,
-  currentNote: {} as NotesType
+  currentNote: {} as NotesType,
+  filters: {} as filtersType
 };
 
 export const notesSlice = createSlice({
@@ -26,13 +28,32 @@ export const notesSlice = createSlice({
       const data = state.data;
       state.currentNote = data.find((item) => item.id === action.payload) || ({} as NotesType);
     },
+    updateNote: (state, action: PayloadAction<{ noteId: string; data: {} }>) => {
+      const { noteId, data } = action.payload;
+      state.data = state.data.map((note) => (note.id === noteId ? { ...note, ...data } : note));
+    },
     clearCurrentNote: (state) => {
       state.currentNote = {} as NotesType;
+    },
+    saveFilters: (state, action: PayloadAction<any>) => {
+      state.filters = action.payload;
+    },
+    clearFilters: (state) => {
+      state.filters = {} as filtersType;
     }
   }
 });
 
 // Action creators are generated for each case reducer function
-export const { addNote, deleteNote, findNote, clearCurrentNote } = notesSlice.actions;
+export const {
+  addNote,
+  deleteNote,
+  findNote,
+  clearCurrentNote,
+  updateNote,
+  saveFilters,
+  clearFilters
+} = notesSlice.actions;
+
 
 export default notesSlice.reducer;
