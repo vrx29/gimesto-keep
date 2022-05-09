@@ -55,4 +55,5 @@ export const {
   clearFilters
 } = notesSlice.actions;
 
+
 export default notesSlice.reducer;
