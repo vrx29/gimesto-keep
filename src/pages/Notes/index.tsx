@@ -1,16 +1,16 @@
 import { ArchiveIcon, DeleteIcon, FilterIcon } from '../../assets/icons';
 import notesImg from '../../assets/images/notes.svg';
 import { Filters, NotesEditor } from '../../components';
-import { clearCurrentNote, deleteNote } from 'features/Notes/notesSlice';
+import { clearCurrentNote, deleteNote, archiveNotes } from 'features/Notes/notesSlice';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
-import { filtersType, NotesType } from 'types/notes';
+import { filtersType, NotesType } from '../../types/notes';
 
 export function Notes() {
   const [showFilters, setShowFilters] = useState(false);
-  const { data, currentNote, filters } = useAppSelector((state) => state.notes);
+  const { data, currentNote, filters } = useAppSelector((state: any) => state.notes);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -37,13 +37,19 @@ export function Notes() {
 
     if (filters.labels && filters.labels.length > 0) {
       newNotes = [...newNotes].filter((item) =>
-        item.labels.some((i) => filters.labels.includes(i))
+        item.labels.some((i: any) => filters.labels.includes(i))
       );
     }
     return newNotes;
   };
 
   const notes = filteredNotes(data, filters);
+
+  const archiveNoteHandler = (e: any, id: string) => {
+    e.stopPropagation();
+    dispatch(archiveNotes(id));
+    toast.success('Note archived successfully', { autoClose: 500 });
+  };
 
   const deleteNoteHandler = (e: any, id: string) => {
     e.stopPropagation();
@@ -111,7 +117,7 @@ export function Notes() {
                 <div className="flex justify-between items-center gap-2 text-xl text-slate-700">
                   <p className="text-xs text-gray-400">Created on : {item.created}</p>
                   <div className="flex gap-2">
-                    <button className="text">
+                    <button className="text" onClick={(e) => archiveNoteHandler(e, item.id)}>
                       <ArchiveIcon />
                     </button>
                     <button className="text-red-400" onClick={(e) => deleteNoteHandler(e, item.id)}>
@@ -125,7 +131,7 @@ export function Notes() {
         ) : (
           <div className="py-16 px-8">
             <img src={notesImg} alt="Notes image" />
-            <p className='text-center pt-4 text-gray-400'>No notes found</p>
+            <p className="text-center pt-4 text-gray-400">No notes found</p>
           </div>
         )}
       </section>

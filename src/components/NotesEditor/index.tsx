@@ -150,7 +150,6 @@ export function NotesEditor() {
         setNoteColor={setNoteColor}
         setContent={setContent}
       />
-
       <ToastContainer />
     </section>
   );
