@@ -3,12 +3,16 @@ import { filtersType, NotesType } from '../../types/notes';
 
 interface NotesState {
   data: Array<NotesType>;
+  archivedNotes: Array<NotesType>;
+  deletedNotes: Array<NotesType>;
   currentNote: NotesType;
   filters: filtersType;
 }
 
 const initialState: NotesState = {
   data: [] as Array<NotesType>,
+  archivedNotes: [] as Array<NotesType>,
+  deletedNotes: [] as Array<NotesType>,
   currentNote: {} as NotesType,
   filters: {} as filtersType
 };
@@ -21,8 +25,9 @@ export const notesSlice = createSlice({
       state.data.push(action.payload);
     },
     deleteNote: (state, action: PayloadAction<string>) => {
-      const { data: oldNotes } = state;
-      state.data = oldNotes.filter((item) => item.id !== action.payload);
+      const note: any = state.data.filter((item) => item.id === action.payload);
+      state.deletedNotes.push(note[0]);
+      state.data = state.data.filter((item) => item.id !== action.payload);
     },
     findNote: (state, action: PayloadAction<string>) => {
       const data = state.data;
@@ -40,6 +45,19 @@ export const notesSlice = createSlice({
     },
     clearFilters: (state) => {
       state.filters = {} as filtersType;
+    },
+    archiveNotes: (state, action: PayloadAction<string>) => {
+      const note: any = state.data.filter((e) => e.id === action.payload);
+      state.data = state.data.filter((e) => e.id !== action.payload);
+      state.archivedNotes.push(note[0]);
+    },
+    unArchiveNotes: (state, action: PayloadAction<string>) => {
+      const note: any = state.archivedNotes.filter((e) => e.id === action.payload);
+      state.archivedNotes = state.archivedNotes.filter((e) => e.id !== action.payload);
+      state.data.push(note[0]);
+    },
+    clearDeletedNotes: (state) => {
+      state.deletedNotes = [] as Array<NotesType>;
     }
   }
 });
@@ -52,8 +70,10 @@ export const {
   clearCurrentNote,
   updateNote,
   saveFilters,
-  clearFilters
+  clearFilters,
+  archiveNotes,
+  unArchiveNotes,
+  clearDeletedNotes
 } = notesSlice.actions;
-
 
 export default notesSlice.reducer;
