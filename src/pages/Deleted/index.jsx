@@ -42,7 +42,7 @@ export function Deleted() {
             <img src={notesImg} alt="Notes not found image" className="max-w-full" />
             <p className="my-2 text-gray-500">No Deleted notes found</p>
             <Link
-              to="/"
+              to="/notes"
               className="text-white bg-teal-600 focus:outline-none hover:bg-teal-700 font-medium rounded-lg text-sm px-5 py-2.5">
               Go back to notes
             </Link>

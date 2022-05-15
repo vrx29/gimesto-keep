@@ -1,10 +1,12 @@
 import notesImg from '../../assets/images/notes.svg';
 import { useAppSelector } from 'app/hooks';
 import { Link } from 'react-router-dom';
-import { NoteCard } from 'components';
+import { NoteCard } from '../../components';
+import { NotesType } from '../../types/notes';
+import { RootState } from '../../app/store';
 
 export function Archived() {
-  const { archivedNotes } = useAppSelector((state) => state.notes);
+  const { archivedNotes } = useAppSelector((state: RootState) => state.notes);
   return (
     <>
       <div className="inline-block min-h-screen w-full p-4">
@@ -14,7 +16,7 @@ export function Archived() {
         </h2>
         {archivedNotes.length > 0 ? (
           <div className="flex gap-2 flex-wrap mt-4">
-            {archivedNotes.map((i) => (
+            {archivedNotes.map((i: NotesType) => (
               <NoteCard key={i.id} note={i} />
             ))}
           </div>
@@ -23,7 +25,7 @@ export function Archived() {
             <img src={notesImg} alt="Notes not found image" className="max-w-full" />
             <p className="my-2 text-gray-500">No Archived notes found</p>
             <Link
-              to="/"
+              to="/notes"
               className="text-white bg-teal-600 focus:outline-none hover:bg-teal-700 font-medium rounded-lg text-sm px-5 py-2.5">
               Go back to notes
             </Link>
