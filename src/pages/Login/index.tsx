@@ -81,7 +81,7 @@ export function Login() {
             </button>
           </form>
           <p className="mt-6 text-gray-500">
-            Don't have an account? &nbsp;
+            Don&#39;t have an account? &nbsp;
             <Link to="/signup" className="text-teal-600 font-semibold cursor-pointer">
               Sign Up
             </Link>
