@@ -17,5 +17,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "tailwind.config.js", "declaration.d.ts"]
+  "include": ["src", "tailwind.config.js"]
 }

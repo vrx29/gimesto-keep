@@ -2,17 +2,7 @@ import { NotesEditor } from 'components';
 import { Route, Routes } from 'react-router-dom';
 import { PrivateRoute } from 'routes';
 import './App.css';
-import {
-  Archived,
-  Deleted,
-  Home,
-  Landing,
-  Login,
-  MockmanTest,
-  Notes,
-  Profile,
-  Signup
-} from './pages';
+import { Archived, Deleted, Home, Landing, Login, Notes, Profile, Signup } from './pages';
 
 function App() {
   return (
@@ -35,7 +25,6 @@ function App() {
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/mockman" element={<MockmanTest />} />
       </Routes>
     </>
   );
