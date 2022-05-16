@@ -1,12 +1,12 @@
-import { ArchiveIcon, DeleteIcon, FilterIcon } from '../../assets/icons';
-import notesImg from '../../assets/images/notes.svg';
-import { Filters, NotesEditor } from '../../components';
+import { ArchiveIcon, DeleteIcon, FilterIcon } from 'assets/icons';
+import notesImg from 'assets/images/notes.svg';
+import { Filters, NotesEditor } from 'components';
 import { clearCurrentNote, deleteNote, archiveNotes } from 'features/Notes/notesSlice';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
-import { filtersType, NotesType } from '../../types/notes';
+import { filtersType, NotesType } from 'types/notes';
 
 export function Notes() {
   const [showFilters, setShowFilters] = useState(false);
@@ -56,7 +56,7 @@ export function Notes() {
 
     if (currentNote.id === id) {
       dispatch(clearCurrentNote());
-      navigate('/');
+      navigate('/notes/');
     }
     dispatch(deleteNote(id));
     toast.success('Note deleted successfully', { autoClose: 500 });
@@ -75,7 +75,7 @@ export function Notes() {
         <div className="my-4 flex justify-between items-center">
           <button
             type="button"
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/notes/')}
             className="text-white bg-teal-600 focus:outline-none hover:bg-teal-700 font-medium rounded-lg text-sm px-5 py-2.5">
             Create new note
           </button>
@@ -98,7 +98,7 @@ export function Notes() {
               <li
                 key={item.id}
                 className="bg-white rounded-lg p-2 mb-2"
-                onClick={() => navigate(`/${item.id}`)}>
+                onClick={() => navigate(`/notes/${item.id}`)}>
                 <p className="text-sm font-medium overflow-hidden	whitespace-nowrap	text-ellipsis">
                   {item.title}
                 </p>

@@ -5,24 +5,24 @@ export const sidebar = [
     id: 1,
     icon: <NoteIcon />,
     name: 'All Notes',
-    link: '/'
+    link: '/notes'
   },
   {
     id: 2,
     icon: <ArchiveIcon />,
     name: 'Archived',
-    link: '/archived'
+    link: '/notes/archived'
   },
   {
     id: 3,
     icon: <DeleteIcon />,
     name: 'Deleted',
-    link: '/deleted'
+    link: '/notes/deleted'
   },
   {
     id: 4,
     icon: <ProfileIcon />,
     name: 'Profile',
-    link: '/profile'
+    link: '/notes/profile'
   }
 ];
