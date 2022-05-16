@@ -1,23 +1,23 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { UserType } from 'types';
 const user = localStorage.getItem('user');
 
-type userType = {
+type InitialStateType = {
   loading: boolean;
-  user: any;
+  user: UserType;
   error: string;
 };
 
-const initialState = {
+const initialState: InitialStateType = {
   loading: false,
-  user: user ? JSON.parse(user) : null,
+  user: user ? JSON.parse(user) : ({} as UserType),
   error: ''
-} as userType;
+};
 
 const loginUser = createAsyncThunk('user/loginUser', async (data: any) => {
   try {
     const res = await axios.post('/api/auth/login', data);
-    console.log(res);
     if (res.status === 200) {
       const { firstName, lastName, email } = res.data.foundUser;
       const authToken = res.data.encodedToken;
@@ -32,7 +32,6 @@ const loginUser = createAsyncThunk('user/loginUser', async (data: any) => {
 const signUpUser = createAsyncThunk('user/signUpUser', async (data: any) => {
   try {
     const res = await axios.post('/api/auth/signup', data);
-
     if (res.status === 201) {
       const { firstName, lastName, email } = res.data.createdUser;
       const authToken = res.data.encodedToken;
@@ -57,7 +56,7 @@ const userSlice = createSlice({
     logout: (state) => {
       localStorage.clear();
       state.loading = false;
-      state.user = null;
+      state.user = {} as UserType;
       state.error = '';
     }
   },
@@ -67,12 +66,12 @@ const userSlice = createSlice({
     });
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.loading = false;
-      state.user = action.payload;
+      state.user = action.payload as UserType;
       state.error = '';
     });
     builder.addCase(loginUser.rejected, (state, action) => {
       state.loading = false;
-      state.user = null;
+      state.user = {} as UserType;
       state.error = action.error.message as string;
     });
     builder.addCase(signUpUser.pending, (state) => {
@@ -80,12 +79,12 @@ const userSlice = createSlice({
     });
     builder.addCase(signUpUser.fulfilled, (state, action) => {
       state.loading = false;
-      state.user = action.payload;
+      state.user = action.payload as UserType;
       state.error = '';
     });
     builder.addCase(signUpUser.rejected, (state, action) => {
       state.loading = false;
-      state.user = {};
+      state.user = {} as UserType;
       state.error = action.error.message as string;
     });
   }
