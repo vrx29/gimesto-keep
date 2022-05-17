@@ -1,12 +1,19 @@
 import notesImg from '../../assets/images/notes.svg';
-import { useAppSelector } from 'app/hooks';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { Link } from 'react-router-dom';
 import { NoteCard } from '../../components';
 import { NotesType } from '../../types/notes';
 import { RootState } from '../../app/store';
+import { useEffect } from 'react';
+import { getArchiveNotes } from 'features/Notes/notesSlice';
 
 export function Archived() {
   const { archivedNotes } = useAppSelector((state: RootState) => state.notes);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getArchiveNotes());
+  }, []);
+  
   return (
     <>
       <div className="inline-block min-h-screen w-full p-4">
@@ -17,7 +24,7 @@ export function Archived() {
         {archivedNotes.length > 0 ? (
           <div className="flex gap-2 flex-wrap mt-4">
             {archivedNotes.map((i: NotesType) => (
-              <NoteCard key={i.id} note={i} />
+              <NoteCard key={i._id} note={i} />
             ))}
           </div>
         ) : (

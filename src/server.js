@@ -14,6 +14,7 @@ import {
   updateNoteHandler
 } from './backend/controllers/NotesController';
 import {
+  deleteAllFromTrashHandler,
   deleteFromTrashHandler,
   getAllTrashNotesHandler,
   restoreFromTrashHandler
@@ -66,6 +67,7 @@ export function makeServer({ environment = 'development' } = {}) {
       this.get('/trash', getAllTrashNotesHandler.bind(this));
       this.post('/trash/restore/:noteId', restoreFromTrashHandler.bind(this));
       this.delete('/trash/delete/:noteId', deleteFromTrashHandler.bind(this));
+      this.delete('/trash/delete', deleteAllFromTrashHandler.bind(this));
     }
   });
   return server;

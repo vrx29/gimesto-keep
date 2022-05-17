@@ -17,5 +17,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "tailwind.config.js"]
+  "include": ["src", "tailwind.config.js", "**/*.ts", "**/*.tsx"]
 }
