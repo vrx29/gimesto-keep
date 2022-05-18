@@ -1,11 +1,11 @@
 import { ArchiveIcon, DeleteIcon, FilterIcon } from 'assets/icons';
 import notesImg from 'assets/images/notes.svg';
 import { Filters, NotesEditor } from 'components';
-import { clearCurrentNote, deleteNote, archiveNotes } from 'features/Notes/notesSlice';
+import { clearCurrentNote, archiveNote, getNotes, trashNote } from 'features/Notes/notesSlice';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { toast } from 'react-toastify';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { filtersType, NotesType } from 'types/notes';
 
 export function Notes() {
@@ -13,6 +13,10 @@ export function Notes() {
   const { data, currentNote, filters } = useAppSelector((state: any) => state.notes);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getNotes());
+  }, [data]);
 
   const filteredNotes = (data: Array<NotesType>, filters: filtersType) => {
     let newNotes = data;
@@ -45,20 +49,21 @@ export function Notes() {
 
   const notes = filteredNotes(data, filters);
 
-  const archiveNoteHandler = (e: any, id: string) => {
+  const archiveNoteHandler = (e: any, item: NotesType) => {
     e.stopPropagation();
-    dispatch(archiveNotes(id));
+    dispatch(archiveNote({ noteId: item._id, note: item }));
     toast.success('Note archived successfully', { autoClose: 500 });
   };
 
   const deleteNoteHandler = (e: any, id: string) => {
     e.stopPropagation();
 
-    if (currentNote.id === id) {
+    if (currentNote._id === id) {
       dispatch(clearCurrentNote());
       navigate('/notes/');
     }
-    dispatch(deleteNote(id));
+    // dispatch(deleteNote(id));
+    dispatch(trashNote(id));
     toast.success('Note deleted successfully', { autoClose: 500 });
   };
 
@@ -75,7 +80,7 @@ export function Notes() {
         <div className="my-4 flex justify-between items-center">
           <button
             type="button"
-            onClick={() => navigate('/notes/')}
+            onClick={() => navigate('/notes/1')}
             className="text-white bg-teal-600 focus:outline-none hover:bg-teal-700 font-medium rounded-lg text-sm px-5 py-2.5">
             Create new note
           </button>
@@ -96,9 +101,9 @@ export function Notes() {
           <ul className="mt-4">
             {notes.map((item: any) => (
               <li
-                key={item.id}
+                key={item._id}
                 className="bg-white rounded-lg p-2 mb-2"
-                onClick={() => navigate(`/notes/${item.id}`)}>
+                onClick={() => navigate(`/notes/${item._id}`)}>
                 <p className="text-sm font-medium overflow-hidden	whitespace-nowrap	text-ellipsis">
                   {item.title}
                 </p>
@@ -117,10 +122,12 @@ export function Notes() {
                 <div className="flex justify-between items-center gap-2 text-xl text-slate-700">
                   <p className="text-xs text-gray-400">Created on : {item.created}</p>
                   <div className="flex gap-2">
-                    <button className="text" onClick={(e) => archiveNoteHandler(e, item.id)}>
+                    <button className="text" onClick={(e) => archiveNoteHandler(e, item)}>
                       <ArchiveIcon />
                     </button>
-                    <button className="text-red-400" onClick={(e) => deleteNoteHandler(e, item.id)}>
+                    <button
+                      className="text-red-400"
+                      onClick={(e) => deleteNoteHandler(e, item._id)}>
                       <DeleteIcon />
                     </button>
                   </div>

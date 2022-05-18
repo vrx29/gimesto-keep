@@ -1,15 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { UserType } from 'types';
+import { UserStateType, UserType } from 'types';
 const user = localStorage.getItem('user');
 
-type InitialStateType = {
-  loading: boolean;
-  user: UserType;
-  error: string;
-};
-
-const initialState: InitialStateType = {
+const initialState: UserStateType = {
   loading: false,
   user: user ? JSON.parse(user) : ({} as UserType),
   error: ''

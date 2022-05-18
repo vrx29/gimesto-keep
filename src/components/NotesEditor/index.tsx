@@ -2,10 +2,9 @@ import { useEffect, useState } from 'react';
 import { EditNote } from '../EditNote';
 import { ToastContainer, toast } from 'react-toastify';
 import { convertFromRaw, EditorState } from 'draft-js';
-import { labelsData } from '../../data/labelsData';
+import { labelsData } from 'data';
 import { Label } from '../Label';
-import { addNote, findNote, updateNote } from 'features/Notes/notesSlice';
-import { v4 as uuid } from 'uuid';
+import { addNoteAPI, findNote, updateNote } from 'features/Notes/notesSlice';
 import 'react-toastify/dist/ReactToastify.css';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
@@ -80,7 +79,7 @@ export function NotesEditor() {
         dispatch(
           updateNote({
             noteId,
-            data: { title, noteColor, content, priority, labels }
+            note: { title, noteColor, content, priority, labels }
           })
         );
       }
@@ -89,8 +88,7 @@ export function NotesEditor() {
         toast.warn('Please enter note title', { autoClose: 1000 });
       } else {
         dispatch(
-          addNote({
-            id: uuid(),
+          addNoteAPI({
             title,
             noteColor,
             content,
@@ -140,7 +138,7 @@ export function NotesEditor() {
           <option value="High">High</option>
         </select>
 
-        {labelsData.map((data) => (
+        {labelsData.map((data: any) => (
           <Label key={data.id} labels={labels} data={data} changeLabel={changeLabel} />
         ))}
       </div>

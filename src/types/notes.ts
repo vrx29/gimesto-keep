@@ -1,5 +1,5 @@
 export type NotesType = {
-  id: string;
+  _id: string;
   title: string;
   noteColor: string;
   content: any;

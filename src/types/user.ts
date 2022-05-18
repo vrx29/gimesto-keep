@@ -4,3 +4,9 @@ export type UserType = {
   email: string;
   authToken: string;
 };
+
+export type UserStateType = {
+  loading: boolean;
+  user: UserType;
+  error: string;
+};

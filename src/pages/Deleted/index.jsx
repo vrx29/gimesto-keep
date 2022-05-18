@@ -2,16 +2,20 @@ import notesImg from '../../assets/images/notes.svg';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { NoteCard } from 'components';
 import { Link } from 'react-router-dom';
-import { clearDeletedNotes } from 'features/Notes/notesSlice';
+import { deleteAllTrashNotes, getDeletedNotes } from 'features/Notes/notesSlice';
 import { toast, ToastContainer } from 'react-toastify';
+import { useEffect } from 'react';
 
 export function Deleted() {
   const { deletedNotes } = useAppSelector((state) => state.notes);
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    dispatch(getDeletedNotes());
+  }, []);
   const deleteAllNotes = (e) => {
     e.stopPropagation();
-    dispatch(clearDeletedNotes());
+    dispatch(deleteAllTrashNotes());
     toast.success('All Notes deleted successfully', { autoClose: 500 });
   };
 
@@ -34,7 +38,7 @@ export function Deleted() {
         {deletedNotes.length > 0 ? (
           <div className="flex gap-2 flex-wrap mt-4">
             {deletedNotes.map((i) => (
-              <NoteCard key={i.id} note={i} />
+              <NoteCard key={i._id} note={i} />
             ))}
           </div>
         ) : (
