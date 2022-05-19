@@ -90,16 +90,13 @@ Open the `localhost:3000` link in the browser.
 <a href="#"><img src="https://img.shields.io/badge/React-273469?style=for-the-badge&logo=react&logoColor=61DAFB" /></a>
 <a href="#"><img src="https://img.shields.io/badge/CSS3-f9c22e?style=for-the-badge&logo=css3&logoColor=black" /></a>
 <a href="#"><img src="https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white" /></a>
-<a href="#"><img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white
-"/></a>
+<a href="#"><img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"/></a>
 <a href="#"><img src="https://img.shields.io/badge/Visual_Studio_Code-4059ad?style=for-the-badge&logo=visual%20studio%20code&logoColor=white" /></a>
 <a href="#"><img src="https://img.shields.io/badge/Figma-ff0054?style=for-the-badge&logo=figma&logoColor=white" /></a>
 <a href="#"><img src="https://img.shields.io/badge/Vercel-252323?style=for-the-badge&logo=vercel&logoColor=white" /></a>
 <a href="#"><img src="https://img.shields.io/badge/Yarn-ff7f11?style=for-the-badge&logo=yarn&logoColor=white" /></a>
-<a href="#"><img src="https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white
-" /></a>
-<a href="#"><img src="https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E
-"/></a>
+<a href="#"><img src="https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white" /></a>
+<a href="#"><img src="https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E" /></a>
 
 </br>
 
