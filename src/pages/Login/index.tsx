@@ -38,6 +38,14 @@ export function Login() {
       dispatch(loginUser({ email, password }));
     }
   };
+
+  const handleTestLogin = () => {
+    const testEmail = 'vineet@gmail.com';
+    const testPassword = 'vineet123';
+    setEmail(testEmail);
+    setPassword(testPassword);
+    dispatch(loginUser({ email: testEmail, password: testPassword }));
+  };
   return (
     <main className="p-4">
       <Header />
@@ -76,8 +84,14 @@ export function Login() {
             <button
               type="submit"
               onClick={handleLogin}
-              className="text-white bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
-              Submit
+              className="w-full text-white border border-teal-600 bg-teal-600 hover:bg-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+              Log in
+            </button>
+            <button
+              type="button"
+              onClick={handleTestLogin}
+              className="text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 mt-2 w-full">
+              Log in with test credentials
             </button>
           </form>
           <p className="mt-6 text-gray-500">
