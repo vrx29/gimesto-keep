@@ -1,46 +1,113 @@
-# Getting Started with Create React App
+<div align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img alt="Gimesto Quiz logo" src="src/assets/favicon/favicon-32x32.png" />
+<h1>Gimesto Keep</h1>
+<br>
 
-## Available Scripts
+![Forks](https://img.shields.io/github/forks/vrx29/gimesto-keep)
+![Stars](https://img.shields.io/github/stars/vrx29/gimesto-keep)
 
-In the project directory, you can run:
+</div>
+ 
+ ---
 
-### `npm start`
+Gimesto keep is a note taking app. In this you can store your notes and edit them. There is an option to archive your notes and unarchive as well. If you delete a note it will be moved to trash/deleted page from ther you can either restore your notes or delete them permanently.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Live Preview: [gimesto-keep.vercel.app](https://gimesto-keep.vercel.app/)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+### Features:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Notes Page where you can create and edit notes.
+2. There are options like priority, labels and notes color.
+3. Rich Text editor is also provided.
+4. Archived, Deleted and Profile page is also provided.
 
-### `npm run build`
+#### Features in progress/TODOs
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Search notes
+2. Add images
+3. Share notes
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Libraries used:
 
-### `npm run eject`
+- **Typescript**
+- **React.js** : v17.0.2
+- **React router**: v6.2.2
+- **Axios** : v0.21.4
+- **Mirage js** : v0.1.41
+- **JWT** : v8.5.1
+- **Tailwind CSS**
+- **Redux Toolkit**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+---
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Get started
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. **Clone the repo:**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+  $ git clone https://github.com/vrx29/gimesto-keep.git
+```
 
-## Learn More
+2. **Switch to `dev` branch:**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+  $ cd gimesto-keep
+  $ git checkout dev
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. **Install required node modules:**
+
+```bash
+  $ npm install
+```
+
+4. **Create a .env file at the root folder create a SECRET KEY**
+
+```bash
+    REACT_APP_JWT_SECRET=radomkey
+```
+
+5. **Start the dev server:**
+
+```bash
+  $ npm start
+                   or
+  $ yarn start
+```
+
+Open the `localhost:3000` link in the browser.
+
+</br>
+
+> 🚀 Tools and Stack Used
+
+<a href="#"><img src="https://img.shields.io/badge/TypeScript-ff206e?style=for-the-badge&logo=typescript&logoColor=white" /></a>
+<a href="#"><img src="https://img.shields.io/badge/React-273469?style=for-the-badge&logo=react&logoColor=61DAFB" /></a>
+<a href="#"><img src="https://img.shields.io/badge/CSS3-f9c22e?style=for-the-badge&logo=css3&logoColor=black" /></a>
+<a href="#"><img src="https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white" /></a>
+<a href="#"><img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white
+"/></a>
+<a href="#"><img src="https://img.shields.io/badge/Visual_Studio_Code-4059ad?style=for-the-badge&logo=visual%20studio%20code&logoColor=white" /></a>
+<a href="#"><img src="https://img.shields.io/badge/Figma-ff0054?style=for-the-badge&logo=figma&logoColor=white" /></a>
+<a href="#"><img src="https://img.shields.io/badge/Vercel-252323?style=for-the-badge&logo=vercel&logoColor=white" /></a>
+<a href="#"><img src="https://img.shields.io/badge/Yarn-ff7f11?style=for-the-badge&logo=yarn&logoColor=white" /></a>
+<a href="#"><img src="https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white
+" /></a>
+<a href="#"><img src="https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E
+"/></a>
+
+</br>
+
+
+> 👨‍💻 Connect with me
+> </br>
+
+<a href="https://twitter.com/vrx29"><img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white"/></a>
+<a href="https://github.com/vrx29/"><img src="https://img.shields.io/badge/GitHub-4a4e69?style=for-the-badge&logo=github&logoColor=white"/></a>
+<a href="https://www.linkedin.com/in/vrx29"><img src="https://img.shields.io/badge/LinkedIn-0466c8?style=for-the-badge&logo=linkedin&logoColor=white"/></a>
+<a href="https://www.instagram.com/vrx29/"><img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white"/></a>
