@@ -11,7 +11,7 @@
  
  ---
 
-Gimesto keep is a note taking app. In this you can store your notes and edit them. There is an option to archive your notes and unarchive as well. If you delete a note it will be moved to trash/deleted page from ther you can either restore your notes or delete them permanently.
+Gimesto keep is a note taking app. In this you can store your notes and edit them. There is an option to archive your notes and unarchive as well. If you delete a note it will be moved to trash/deleted page from there you can either restore your notes or delete them permanently.
 
 Live Preview: [gimesto-keep.vercel.app](https://gimesto-keep.vercel.app/)
 
@@ -99,7 +99,6 @@ Open the `localhost:3000` link in the browser.
 <a href="#"><img src="https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E" /></a>
 
 </br>
-
 
 > 👨‍💻 Connect with me
 > </br>
