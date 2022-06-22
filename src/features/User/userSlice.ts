@@ -19,6 +19,7 @@ const loginUser = createAsyncThunk('user/loginUser', async (data: any) => {
       return { firstName, lastName, email, authToken };
     }
   } catch (error: any) {
+    console.log(error);
     throw new Error(error.response.data.errors[0]);
   }
 });

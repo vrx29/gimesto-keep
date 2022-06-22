@@ -140,16 +140,20 @@ const getDeletedNotes = createAsyncThunk('/notes/getDeletedNotes', async (_, { g
 
 const trashNote = createAsyncThunk('/notes/trashNote', async (noteId: string, { getState }) => {
   const { user } = getState() as { user: UserStateType };
-  const response = await axios.post(
-    `api/notes/trash/${noteId}`,
-    {},
-    {
-      headers: {
-        authorization: user.user.authToken
+  try {
+    const response = await axios.post(
+      `/api/notes/trash/${noteId}`,
+      {},
+      {
+        headers: {
+          authorization: user.user.authToken
+        }
       }
-    }
-  );
-  return response.data;
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 const restoreTrashNote = createAsyncThunk(

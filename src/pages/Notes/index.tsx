@@ -9,8 +9,10 @@ import { useEffect, useState } from 'react';
 import { filtersType, NotesType } from 'types/notes';
 
 export function Notes() {
+  const [searchQuery, setSearchQuery] = useState('');
   const [showFilters, setShowFilters] = useState(false);
   const { data, currentNote, filters } = useAppSelector((state: any) => state.notes);
+  const [notes, setNotes] = useState(data || []);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -46,8 +48,10 @@ export function Notes() {
     }
     return newNotes;
   };
-
-  const notes = filteredNotes(data, filters);
+  useEffect(() => {
+    const newNotes = filteredNotes(data, filters);
+    setNotes(newNotes);
+  }, [filters]);
 
   const archiveNoteHandler = (e: any, item: NotesType) => {
     e.stopPropagation();
@@ -57,15 +61,26 @@ export function Notes() {
 
   const deleteNoteHandler = (e: any, id: string) => {
     e.stopPropagation();
+    dispatch(trashNote(id));
 
     if (currentNote._id === id) {
       dispatch(clearCurrentNote());
-      navigate('/notes/');
+      navigate('/notes/1');
     }
     // dispatch(deleteNote(id));
-    dispatch(trashNote(id));
     toast.success('Note deleted successfully', { autoClose: 500 });
   };
+
+  useEffect(() => {
+    if (searchQuery.length > 0) {
+      const newNotes = data.filter((item: NotesType) => {
+        return item.title.toLowerCase().startsWith(searchQuery.toLowerCase());
+      });
+      setNotes(newNotes);
+    } else {
+      setNotes(data);
+    }
+  }, [searchQuery]);
 
   return (
     <div className="flex min-h-screen">
@@ -74,6 +89,8 @@ export function Notes() {
           <input
             type="search"
             placeholder="Search notes"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full h-10 rounded-lg pl-2 outline-none"
           />
         </div>
