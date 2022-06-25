@@ -12,6 +12,7 @@ export function Notes() {
   const [searchQuery, setSearchQuery] = useState('');
   const [showFilters, setShowFilters] = useState(false);
   const { data, currentNote, filters } = useAppSelector((state: any) => state.notes);
+  const [notes, setNotes] = useState(data || []);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   let notes = data;
@@ -47,7 +48,6 @@ export function Notes() {
   useEffect(() => {
     const newNotes = filteredNotes(data, filters);
     notes = newNotes
-    // setNotes(newNotes);
   }, [filters]);
 
   const archiveNoteHandler = (e: any, item: NotesType) => {
