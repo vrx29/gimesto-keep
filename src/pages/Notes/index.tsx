@@ -12,7 +12,6 @@ export function Notes() {
   const [searchQuery, setSearchQuery] = useState('');
   const [showFilters, setShowFilters] = useState(false);
   const { data, currentNote, filters } = useAppSelector((state: any) => state.notes);
-  const [notes, setNotes] = useState(data || []);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   let notes = data;
