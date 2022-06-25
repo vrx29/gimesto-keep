@@ -45,7 +45,7 @@ export function EditNote({
             <button
               key={item.id}
               onClick={() => setNoteColor(item.color)}
-              className={`${item.color} border border-gray-300 rounded-lg text-sm px-4 py-4`}></button>
+              className={`${item.color} border border-gray-500 rounded-lg text-sm px-4 py-4`}></button>
           ))}
         </div>
       </div>
