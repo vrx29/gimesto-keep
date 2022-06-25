@@ -1,7 +1,7 @@
 import { ArchiveIcon, DeleteIcon, FilterIcon } from 'assets/icons';
 import notesImg from 'assets/images/notes.svg';
 import { Filters, NotesEditor } from 'components';
-import { clearCurrentNote, archiveNote, getNotes, trashNote } from 'features/Notes/notesSlice';
+import { clearCurrentNote, archiveNote,  trashNote } from 'features/Notes/notesSlice';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { toast } from 'react-toastify';
@@ -12,13 +12,9 @@ export function Notes() {
   const [searchQuery, setSearchQuery] = useState('');
   const [showFilters, setShowFilters] = useState(false);
   const { data, currentNote, filters } = useAppSelector((state: any) => state.notes);
-  const [notes, setNotes] = useState(data || []);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(getNotes());
-  }, [data]);
+  let notes = data;
 
   const filteredNotes = (data: Array<NotesType>, filters: filtersType) => {
     let newNotes = data;
@@ -50,7 +46,8 @@ export function Notes() {
   };
   useEffect(() => {
     const newNotes = filteredNotes(data, filters);
-    setNotes(newNotes);
+    notes = newNotes
+    // setNotes(newNotes);
   }, [filters]);
 
   const archiveNoteHandler = (e: any, item: NotesType) => {
@@ -67,7 +64,6 @@ export function Notes() {
       dispatch(clearCurrentNote());
       navigate('/notes/1');
     }
-    // dispatch(deleteNote(id));
     toast.success('Note deleted successfully', { autoClose: 500 });
   };
 
@@ -76,9 +72,9 @@ export function Notes() {
       const newNotes = data.filter((item: NotesType) => {
         return item.title.toLowerCase().startsWith(searchQuery.toLowerCase());
       });
-      setNotes(newNotes);
+      notes = newNotes
     } else {
-      setNotes(data);
+      notes = data
     }
   }, [searchQuery]);
 
